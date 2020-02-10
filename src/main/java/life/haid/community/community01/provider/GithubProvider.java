@@ -39,8 +39,8 @@ public class GithubProvider {
                 .build();
         try {
             Response response = client.newCall(request).execute();/*execute方法同步地发送请求，直接返回 HTTP 响应。Response就是用来设置响应消息。*/
-            String string = response.body().string();
-            GithubUser githubUser = JSON.parseObject(string, GithubUser.class);//将信息转为Object类型
+            String string = response.body().string();//获取个人信息
+            GithubUser githubUser = JSON.parseObject(string, GithubUser.class);//将GithubUser需要的信息转为Object类型
             return githubUser;
         } catch (IOException e) {
         }
