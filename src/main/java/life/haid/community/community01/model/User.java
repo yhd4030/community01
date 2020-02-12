@@ -1,5 +1,5 @@
 package life.haid.community.community01.model;
-
+//数据库对象类
 public class User {
     private Integer id;
     private String name;
