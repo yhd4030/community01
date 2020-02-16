@@ -1,5 +1,8 @@
 package life.haid.community.community01.model;
 
+import lombok.Data;
+
+@Data
 public class Question {
     private Integer id;
     private String title;
@@ -32,8 +35,8 @@ public class Question {
         return description;
     }
 
-    public void setDecription(String decription) {
-        this.description = decription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getTag() {
@@ -91,6 +94,4 @@ public class Question {
     public void setLikeCount(Integer likeCount) {
         this.likeCount = likeCount;
     }
-
-
 }
