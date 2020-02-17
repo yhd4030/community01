@@ -6,50 +6,11 @@
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/bootstrap-theme.min.css" rel="stylesheet"/>
     <link href="css/community01.css" rel="stylesheet"/>
+    <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.min.js" type="application/javascript"></script>
+
 <body class="haid" style="background-color: #efefef">
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button aria-expanded="false" class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1"
-                    data-toggle="collapse" type="button">
-                <span class="sr-only">Haid社区</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Haid社区</a>
-        </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <form class="navbar-form navbar-left">
-                <div class="form-group">
-                    <input class="form-control" placeholder="搜索" type="text">
-                </div>
-                <button class="btn btn-default" type="submit">点击搜索</button>
-            </form>
-            <ul class="nav navbar-nav navbar-right">
-                <li th:if="${session.user !=null}">
-                    <a href="/publish">发布</a>
-                </li>
-                <li class="dropdown" th:if="${session.user !=null}">
-                    <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown"
-                       href="#"
-                       role="button" th:text="${session.user.getName()}"><span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">消息中心</a></li>
-                        <li><a href="#">个人中心</a></li>
-                        <li><a href="#">退出登录</a></li>
-                    </ul>
-                </li>
-                <li th:if="${session.user ==null}"><a
-                        href="https://github.com/login/oauth/authorize?client_id=5b2932d4833eda58ec48&redirect_uri=http://localhost:8888/callback&scope=user&state=1">登录</a>
-                </li>
-
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-
-</nav>
+<div th:insert="~{navigation :: nav}"></div>
 <div class="container-fluid main" style="background-color: white">
     <div class="row">
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 ">

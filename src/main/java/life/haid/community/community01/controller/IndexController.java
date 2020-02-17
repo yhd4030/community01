@@ -29,7 +29,7 @@ public class IndexController {
 
     @GetMapping("/")
     public String index(HttpServletRequest request,
-                        Model model,
+                        Model model,//model是用于前端页面数据展示
                         @RequestParam(name="page",defaultValue = "1")Integer page ,
                         @RequestParam(name="size",defaultValue = "5")Integer size
     ) {
@@ -45,8 +45,8 @@ public class IndexController {
                     break;
                 }
             }
-        PaginationDTO pagination = questionService.list(page,size);
-        model.addAttribute("pagination",pagination);
+        PaginationDTO pagination = questionService.list(page,size);//向DTO层传数据
+        model.addAttribute("pagination",pagination);//向页面传输name为pagination的 pagination对象
         return "index";
     }
 

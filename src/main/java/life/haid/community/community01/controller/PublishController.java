@@ -69,13 +69,14 @@ public class PublishController {
             return "publish";
         }
         Question question = new Question();
+        //向Question类里的对象赋值
         question.setTitle(title);
         question.setDescription(description);
         question.setTag(tag);
         question.setCreator(user.getId());
         question.setGmtCreate(System.currentTimeMillis());
         question.setGmtModified(question.getGmtCreate());
-        questionMapper.create(question);
-        return "redirect:/";
+        questionMapper.create(question);//向数据库插入数据
+        return "redirect:/";//返回给publish页面
     }
 }
