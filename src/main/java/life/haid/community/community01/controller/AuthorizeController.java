@@ -2,21 +2,19 @@ package life.haid.community.community01.controller;
 
 import life.haid.community.community01.dto.AccessTokenDTO;
 import life.haid.community.community01.dto.GithubUser;
-import life.haid.community.community01.mapper.UserMapper;
 import life.haid.community.community01.model.User;
 import life.haid.community.community01.provider.GithubProvider;
+import life.haid.community.community01.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.HttpMediaTypeException;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.crypto.Data;
 import java.util.UUID;
 
 @Controller
@@ -35,7 +33,7 @@ public class AuthorizeController {
     private String redirectUri;
 
     @Autowired
-    private UserMapper userMapper;
+    private UserService userService;
 
     @GetMapping("/callback")
     public String callbcak(@RequestParam(name="code") String code,
@@ -57,19 +55,24 @@ public class AuthorizeController {
             user.setToken(token);
             user.setName(githubUser.getName());
             user.setAccountId(String.valueOf(githubUser.getId()));
-            user.setGmtCreate(System.currentTimeMillis());
-            user.setGmtModified(user.getGmtCreate());
+
             user.setAvatarUrl(githubUser.getAvatar_url());
-            userMapper.insert(user);
+            userService.createOrUpdate(user);
+
             response.addCookie(new Cookie("token",token));//向Cookie加入数据
-
-
-
-
             return "redirect:/" ;
         }else{
             //登陆失败
             return "redirect:/" ;
         }
+    }
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request,
+                       HttpServletResponse response){
+        request.getSession().removeAttribute("user");
+        Cookie cookie =new Cookie("token",null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return "redirect:/";
     }
 }

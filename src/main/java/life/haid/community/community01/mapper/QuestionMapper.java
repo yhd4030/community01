@@ -1,5 +1,6 @@
 package life.haid.community.community01.mapper;
 
+import life.haid.community.community01.dto.QuestionDTO;
 import life.haid.community.community01.model.Question;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -22,4 +23,7 @@ public interface QuestionMapper {
 
     @Select("select count(1) from question_1 where creator=#{userId}")
     Integer countByUserId(@Param("userId") Integer userId);
+
+    @Select("select * from question_1 where ID=#{id}")
+    Question getById(@Param("id") Integer id);
 }

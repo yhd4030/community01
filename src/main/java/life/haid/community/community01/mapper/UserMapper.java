@@ -1,10 +1,7 @@
 package life.haid.community.community01.mapper;
 
 import life.haid.community.community01.model.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 /**
  * Mapper
@@ -18,7 +15,12 @@ public interface UserMapper {
     void insert(User user);
     @Select("select * from user_1 where token = #{token}")
     User findByToken(@Param("token") String token);
-    @Select("select * from user_1 where token = #{id}")
+    @Select("select * from user_1 where id = #{id}")
     User findById(@Param("id") Integer id);
+    @Select("select * from user_1 where account_id = #{accountId}")
+    User findByAccountId(@Param("accountId")String accountId);
+    @Update("update user_1 set name = #{name}, token = #{token}, gmt_modified = #{gmtModified}, avatar_url=#{avatarUrl} where id=#{id}")
+    void update(User user);
+
 }
 
