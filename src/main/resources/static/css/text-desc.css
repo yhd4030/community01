@@ -23,3 +23,13 @@
 .jumbotron{
      margin: 50px;
  }
+.media-body{
+    padding-top: 10px;
+}
+.commment{
+    margin: 10px 0;
+}
+.c-btn{
+    float: right;
+    margin-bottom: 1px;
+}

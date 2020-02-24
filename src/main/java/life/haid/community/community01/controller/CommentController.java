@@ -3,29 +3,30 @@ package life.haid.community.community01.controller;
 import life.haid.community.community01.dto.CommentDTO;
 import life.haid.community.community01.dto.ResultDTO;
 import life.haid.community.community01.exception.CustomizeErrorCode;
-import life.haid.community.community01.mapper.CommentMapper;
 import life.haid.community.community01.model.Comment;
 import life.haid.community.community01.model.User;
 import life.haid.community.community01.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
+import javax.validation.Valid;
 
 @Controller
 public class CommentController {
     @Autowired
     private CommentService commentService;
-
     @ResponseBody
-    @RequestMapping( value = "/comment",method = RequestMethod.POST)
-    public Object post(@RequestBody CommentDTO commentDTO, HttpServletRequest request){
+    @RequestMapping(value = "/comment", method = RequestMethod.POST)
+    public Object post(@RequestBody CommentDTO commentDTO,
+                       HttpServletRequest request) {
 
         User user = (User) request.getSession().getAttribute("user");
-        if (user==null){
+        if (user == null) {
             return ResultDTO.errorOf(CustomizeErrorCode.NO_LOGIN);
         }
 
