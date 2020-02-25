@@ -12,13 +12,21 @@ function post() {
             "content":  content,
             "type": 1
         }),
-        success:function (responsen) {
-           if (responsen.code ==200){
+        success:function (response) {
+           if (response.code ==200){
                $("#comment_section").hide();
            }else{
-               alert(responsen.message);
+               if (response.code ==2003){
+                    var isAccepted = confirm(response.message);
+                    if (isAccepted){
+                        window.open("https://github.com/login/oauth/authorize?client_id=5b2932d4833eda58ec48&redirect_uri=http://localhost:8888/callback&scope=user&state=1");
+                        window.localStorage.setItem("closable",true);
+                    }
+               }else{
+                   alert(response.message);
+               }
            }
-           console.log(responsen);
+           console.log(response);
         },
         dataType: "json"
     });

@@ -58,7 +58,6 @@ public class AuthorizeController {
 
             user.setAvatarUrl(githubUser.getAvatar_url());
             userService.createOrUpdate(user);
-
             response.addCookie(new Cookie("token",token));//向Cookie加入数据
             return "redirect:/" ;
         }else{

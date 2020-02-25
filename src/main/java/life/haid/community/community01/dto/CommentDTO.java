@@ -1,39 +1,18 @@
 package life.haid.community.community01.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
+import life.haid.community.community01.model.User;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
 
 @Data
 public class CommentDTO {
-    private Long parentId;
-    private String content;
+    private Long id;
+    private long parentId;
     private Integer type;
+    private Long commentator;
+    private Long gmtCreate;
+    private Long gmtModified;
+    private Long likeCount;
+    private String content;
+    private User user;
 
-    @JsonProperty(value = "parentId")
-    public Long getParentId() {
-        return parentId;
-    }
-    @JsonProperty(value = "parentId")
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
-    }
-    @JsonProperty(value = "content")
-    public String getContent() {
-        return content;
-    }
-    @JsonProperty(value = "content")
-    public void setContent(String content) {
-        this.content = content;
-    }
-    @JsonProperty(value = "type")
-    public Integer getType() {
-        return type;
-    }
-    @JsonProperty(value = "type")
-    public void setType(Integer type) {
-        this.type = type;
-    }
 }

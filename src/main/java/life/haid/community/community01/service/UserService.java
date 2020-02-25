@@ -12,7 +12,6 @@ import java.util.List;
 public class UserService {
     @Autowired
     private UserMapper userMapper;
-
     public void createOrUpdate(User user) {
         UserExample userExample = new UserExample();
         userExample.createCriteria().andTokenEqualTo(user.getAccountId());
@@ -23,13 +22,9 @@ public class UserService {
             user.setGmtModified(user.getGmtCreate());
             userMapper.insert(user);
         }else {
-
             //更新
             User dbUser = users.get(0);
-
-
             User updateUser=new User();
-
             updateUser.setGmtModified(System.currentTimeMillis());
             updateUser.setAvatarUrl(user.getAvatarUrl());
             updateUser.setName(user.getName());
