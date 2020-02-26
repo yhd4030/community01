@@ -4,10 +4,7 @@ import life.haid.community.community01.dto.CommentDTO;
 import life.haid.community.community01.enums.CommentTypeEnum;
 import life.haid.community.community01.exception.CustomizeErrorCode;
 import life.haid.community.community01.exception.CustomizeException;
-import life.haid.community.community01.mapper.CommentMapper;
-import life.haid.community.community01.mapper.QuestionExtMapper;
-import life.haid.community.community01.mapper.QuestionMapper;
-import life.haid.community.community01.mapper.UserMapper;
+import life.haid.community.community01.mapper.*;
 import life.haid.community.community01.model.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +27,8 @@ public class CommentService {
     private QuestionExtMapper questionExtMapper;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private CommentExtMapper commentExtMapper;
     @Transactional
 
     public void insert(Comment comment) {
@@ -46,6 +45,11 @@ public class CommentService {
                 throw new CustomizeException(CustomizeErrorCode.COMMENT_NOT_FOUND);
             }
             commentMapper.insert(comment);
+            //增加评论数
+            Comment parentComment = new Comment();
+            parentComment.setId(comment.getParentId());
+            parentComment.setCommentCount(1);
+            commentExtMapper.incCommentCount(parentComment);
 
         }else{
 
@@ -60,11 +64,12 @@ public class CommentService {
         }
     }
 
-    public List<CommentDTO> listByQuestionId(Long id) {
+    public List<CommentDTO> listByTargetId(Long id, CommentTypeEnum type) {
         CommentExample commentExample = new CommentExample();
         commentExample.createCriteria()
                 .andParentIdEqualTo(id)
-                .andTypeEqualTo(CommentTypeEnum.QUESTION.getType());
+                .andTypeEqualTo(type.getType());
+        commentExample.setOrderByClause("gmt_create desc");
         List<Comment> comments = commentMapper.selectByExample(commentExample);
         if (comments.size()==0){
             return new ArrayList<>();

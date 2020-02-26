@@ -35,23 +35,47 @@
     float: right;
     margin-bottom: 1px;
 }
+.sub-comments{
+    border-radius: 5px;
+    margin-top: 15px;
+    border: 1px solid #eee;
+    padding-top: 15px;
+    margin-bottom: 15px;
+}
 .comment-sp{
     margin-top: 0px;
 }
-.menu-s{
+.menu{
     color: #999;
     margin-top: 5px;
 }
-.menu-s .icon-s{
+.menu .icon{
     margin-right: 6px;
     font-size: 15px;
     cursor: pointer;
 }
-.menu-s .icon-s:hover{
+.menu .icon:hover{
+    color: #499ef3;
+}
+.menu .active{
+    color: #499ef3;
+}
+.menu .comment-icon{
+
+    font-size: 15px;
+    cursor: pointer;
+}
+.menu .comment-icon:hover{
     color: #499ef3;
 }
 .comments{
     margin-bottom: 15px;
     border-bottom: 1px solid #eee;
     padding-bottom: 5px;
+}
+.question-title-1{
+    margin-top: 25px;
+}
+.sub-comments .btn{
+    margin: 10px 0;
 }
