@@ -29,8 +29,11 @@
                     <span class="text-desc">
                         <span th:text="${question.commentCount}"></span> 个回复 ·
                         <span th:text="${question.viewCount}"></span> 次浏览 ·
-                        <span th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></span>
-
+                        <span th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></span> ·
+                        <a id="bianji" th:href="@{'/publish/'+${question.id}}" class="community01-menu"
+                           th:if="${session.user!=null && session.user.id==question.creator}">
+                        <span aria-hidden="true" class="glyphicon glyphicon-pencil">编辑</span>
+                        </a>
                     </span>
                 </div>
             </div>
